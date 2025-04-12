@@ -1,43 +1,71 @@
 #include <stdio.h>
+#include <string.h>
 
 // Desafio de Xadrez - MateCheck
 // Nível novato
 // Nível aventureiro
+// Nível mestre
+
+//Recursiva para o movimento da torre
+void moveTorre (int casas){
+    if (casas>0){
+        printf("TORRE - DIREITA\n");
+        moveTorre(casas-1);
+        
+    }
+}
+
+//Recursiva para o movimento do bispo
+void moveBispo (int casas){
+    char vertical [25];
+    char horizontal [10];
+    for (int i=0; i<casas; i++){
+        strcpy(vertical, "BISPO - DIAGONAL/CIMA");
+        for (int j =0; j<1;j++){
+            strcpy(horizontal,"/DIREITA\n");
+            printf("%s%s",vertical,horizontal);
+        }
+    }
+}
+
+//Recursiva para o movimento da rainha
+void moveRainha(int casas){
+    int i = 0;
+    while(i<casas){
+        printf("RAINHA - ESQUERDA\n");
+        i++;
+    }
+}
+
 
 
 int main() {
     int i = 0;
-    int movimentoCavalo = 1;
-
+    int movimentoCavalo = 0;
 
     //Movimento da torre
-    for (int i=0; i<5; i++){
-        printf("DIREITA\n");
-    }
+    moveTorre(5);
 
     //Movimento da rainha
-    while(i<8){
-        printf("ESQUERDA\n");
-        i++;
-    }
+    moveRainha(8);
 
     //Movimento do bispo
-    i = 0;
-    do{
-        printf("DIAGONAL/CIMA/DIREITA\n");
-        i++;
-    }while(i<5);
+    moveBispo(5);
 
-    
-    while (movimentoCavalo>0) {
-        for (i = 0; i<2; i++){
-            printf("BAIXO\n");
+    //Movimento do cavalo
+    while (movimentoCavalo < 3) {
+        for (int movimentoVertical = 0; movimentoVertical < 3; movimentoVertical++) {
+            if (movimentoVertical % 2 == 0 && movimentoVertical != 0) {
+                printf("CAVALO - DIREITA\n\n");
+                movimentoCavalo++;
+                break;                
+            } else {
+                movimentoCavalo++;
+                printf("CAVALO - CIMA\n");
+            } 
         }
-
-        printf("ESQUERDA\n");
-        movimentoCavalo--;
-    }  
-
+    }
+    
 
     return 0;
 }
